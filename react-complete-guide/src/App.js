@@ -10,26 +10,50 @@ class App extends Component {
       { name: "Jooje", age: 29 },
       { name: "Chicken Nugget", age: Math.floor(Math.random() * 30) },
     ],
-    otherState: 'Some Other Values'
+    otherState: "Some Other Values",
   };
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
     // console.log('was clicked');
     // DON'T DO THIS: this.state.people[0].age = Math.floor(Math.random() * 30);
     this.setState({
       people: [
         { name: "Cheeseburger", age: Math.floor(Math.random() * 30) },
-        { name: "Jooje", age: 29 },
-        { name: "Chicken Nugget", age: Math.floor(Math.random() * 30) },
-      ]
+        { name: "Jooje", age: Math.floor(Math.random() * 30) },
+        { name: newName, age: Math.floor(Math.random() * 30) },
+      ],
     });
-  }
+  };
+
+  nameChangedHandler = (event) => {
+    this.setState({
+      people: [
+        { name: "Cheeseburger", age: Math.floor(Math.random() * 30) },
+        { name: "Jooje", age: Math.floor(Math.random() * 30) },
+        { name: event.target.value, age: Math.floor(Math.random() * 30) },
+      ],
+    });
+  };
 
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid #234ec4',
+      padding: '8px',
+      cursor: 'pointer'
+    };
     return (
       <div className="App">
-        <h1>I'm a React App <span className="App-logo" role="img" aria-label="money tongue emoji">🤑</span></h1>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <h1>
+          I'm a React App
+          <span className="App-logo" role="img" aria-label="money tongue emoji">
+            🤑
+          </span>
+        </h1>
+        <button style={style} onClick={() => this.switchNameHandler("French Fries")}>
+          Switch Name
+        </button>
         <Person
           name={this.state.people[0].name}
           age={this.state.people[0].age}
@@ -40,6 +64,8 @@ class App extends Component {
         <Person
           name={this.state.people[2].name}
           age={this.state.people[2].age}
+          click={this.switchNameHandler.bind(this, "Chicken Nugget!")}
+          changed={this.nameChangedHandler}
         />
       </div>
     );
