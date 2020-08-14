@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 
 import Person from "./Person/Person";
+import UserInput from "./BaseSyntaxAssignment/UserInput/UserInput";
+import UserOutput from "./BaseSyntaxAssignment/UserOutput/UserOutput";
 
 class App extends Component {
   state = {
@@ -11,6 +13,7 @@ class App extends Component {
       { name: "Chicken Nugget", age: Math.floor(Math.random() * 30) },
     ],
     otherState: "Some Other Values",
+    userName: 'Cheeseburger'
   };
 
   switchNameHandler = (newName) => {
@@ -34,6 +37,12 @@ class App extends Component {
       ],
     });
   };
+
+  userNameChangedHandler = (event) => {
+    this.setState({
+      userName: event.target.value
+    })
+  }
 
   render() {
     const style = {
@@ -67,6 +76,9 @@ class App extends Component {
           click={this.switchNameHandler.bind(this, "Chicken Nugget!")}
           changed={this.nameChangedHandler}
         />
+
+        <UserInput userName={this.state.userName} changed={this.userNameChangedHandler}></UserInput>
+        <UserOutput userName={this.state.userName}></UserOutput>
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App 💞!!!'))
