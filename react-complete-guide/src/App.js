@@ -5,6 +5,9 @@ import Person from "./Person/Person";
 import UserInput from "./BaseSyntaxAssignment/UserInput/UserInput";
 import UserOutput from "./BaseSyntaxAssignment/UserOutput/UserOutput";
 
+import ValidationComponent from "./ListConditionalAssignment/ValidationComponent/Validation";
+import CharComponent from "./ListConditionalAssignment/CharComponent/Char";
+
 class App extends Component {
   state = {
     people: [
@@ -19,6 +22,7 @@ class App extends Component {
     otherState: "Some Other Values",
     userName: "Cheeseburger",
     showPeople: false,
+    chars: "",
   };
 
   // switchNameHandler = (newName) => {
@@ -34,7 +38,6 @@ class App extends Component {
   // };
 
   nameChangedHandler = (event, personId) => {
-
     const personIndex = this.state.people.findIndex(
       (person) => person.id === personId
     );
@@ -42,7 +45,7 @@ class App extends Component {
     // const person = Object.assign({}, this.state.people[personIndex]);
 
     const person = {
-      ...this.state.people[personIndex]
+      ...this.state.people[personIndex],
     };
 
     person.name = event.target.value;
@@ -51,7 +54,7 @@ class App extends Component {
 
     people[personIndex] = person;
 
-    this.setState({people: people})
+    this.setState({ people: people });
     // this.setState({
     //   people: [
     //     { name: "Cheeseburger", age: Math.floor(Math.random() * 30) },
@@ -77,6 +80,18 @@ class App extends Component {
   togglePeople = () => {
     const togglePeople = !this.state.showPeople;
     this.setState({ showPeople: togglePeople });
+  };
+
+  charChangeHandler = (event) => {
+    this.setState({
+      chars: event.target.value,
+    });
+  };
+
+  deleteCharHandler = (charIndex) => {
+    const word = [...this.state.chars.split("")];
+    word.splice(charIndex, 1);
+    this.setState({ chars: word.join("") });
   };
 
   render() {
@@ -110,12 +125,35 @@ class App extends Component {
       );
     }
 
+    let chars = null;
+    let charDivStyle = {
+      margin: "32px",
+    };
+    if (this.state.chars) {
+      chars = (
+        <div style={charDivStyle}>
+          {this.state.chars.split("").map((char, index) => {
+            return (
+              <CharComponent
+                char={char}
+                key={index}
+                click={() => this.deleteCharHandler(index)}
+              />
+            );
+          })}
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>
           I'm a React App
           <span className="App-logo" role="img" aria-label="money tongue emoji">
             🤑
+          </span>
+          <span className="App-logo" role="img" aria-label="swirling hearts">
+            💞
           </span>
         </h1>
         {/* <button
@@ -134,6 +172,18 @@ class App extends Component {
           changed={this.userNameChangedHandler}
         ></UserInput>
         <UserOutput userName={this.state.userName}></UserOutput>
+        <div>
+          <h4>Lists And Conditionals Assignment</h4>
+          <input
+            type="text"
+            onChange={this.charChangeHandler}
+            value={this.state.chars}
+          />
+          <ValidationComponent
+            length={this.state.chars.length}
+          ></ValidationComponent>
+          {chars}
+        </div>
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App 💞!!!'))

@@ -1,0 +1,16 @@
+.validation-text {
+    width: 320px;
+    margin: 10px auto;
+    padding: 5px;
+}
+
+.invalid-text {
+    color: red;
+    border: 1px solid red;
+    
+}
+
+.valid-text {
+    color: green;
+    border: 1px solid green;
+}
