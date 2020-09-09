@@ -22,6 +22,37 @@
   font-size: large;
 }
 */
+
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.btn {
+  background-color: #26b38c;
+  color: white;
+  font: inherit;
+  border: 1px solid #178849;
+  padding: 8px;
+  margin: 8px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: lightgreen;
+  color: black;
+}
+.btn-toggle {
+  background-color: red;
+  color: black;
+}
+.btn-toggle:hover {
+  background-color: salmon;
+}
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

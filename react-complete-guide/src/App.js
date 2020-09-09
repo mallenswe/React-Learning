@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+// import Radium, { StyleRoot } from "radium";
+import styled from 'styled-components';
 import "./App.css";
 
 import Person from "./Person/Person";
@@ -7,6 +9,21 @@ import UserOutput from "./BaseSyntaxAssignment/UserOutput/UserOutput";
 
 import ValidationComponent from "./ListConditionalAssignment/ValidationComponent/Validation";
 import CharComponent from "./ListConditionalAssignment/CharComponent/Char";
+
+
+// const StyledButton = styled.button`
+//   background-color: ${props => props.toggleColors ? 'red' : '#26b38c'};
+//   color: white;
+//   font: inherit;
+//   border: 1px solid #178849;
+//   padding: 8px;
+//   margin: 8px;
+//   cursor: pointer;
+//   &:hover {
+//     background-color: ${props => props.toggleColors ? 'salmon' : 'lightgreen'};
+//     color: black;
+//   }
+// `
 
 class App extends Component {
   state = {
@@ -95,14 +112,19 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "white",
-      font: "inherit",
-      border: "1px solid #234ec4",
-      padding: "8px",
-      margin: "8px",
-      cursor: "pointer",
-    };
+    // const style = {
+    //   backgroundColor: "#26b38c",
+    //   color: "white",
+    //   font: "inherit",
+    //   border: "1px solid #178849",
+    //   padding: "8px",
+    //   margin: "8px",
+    //   cursor: "pointer",
+    //   ":hover": {
+    //     backgroundColor: "lightgreen",
+    //     color: "black",
+    //   },
+    // };
 
     let persons = null;
 
@@ -123,6 +145,11 @@ class App extends Component {
           })}
         </div>
       );
+      // style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "white",
+      // };
     }
 
     let chars = null;
@@ -145,49 +172,72 @@ class App extends Component {
       );
     }
 
+    const classes = [];
+    if (this.state.people.length <= 2) {
+      classes.push("red");
+    }
+
+    if (this.state.people.length <= 1) {
+      classes.push("bold");
+    }
+
     return (
-      <div className="App">
-        <h1>
-          I'm a React App
-          <span className="App-logo" role="img" aria-label="money tongue emoji">
-            🤑
-          </span>
-          <span className="App-logo" role="img" aria-label="swirling hearts">
-            💞
-          </span>
-        </h1>
-        {/* <button
+      // <StyleRoot>
+        <div className="App">
+          <h1>
+            I'm a React App
+            <span
+              className="App-logo"
+              role="img"
+              aria-label="money tongue emoji"
+            >
+              🤑
+            </span>
+            <span className="App-logo" role="img" aria-label="swirling hearts">
+              💞
+            </span>
+          </h1>
+          <p className={classes.join(" ")}>This is really working!</p>
+          {/* <button
           style={style}
           onClick={() => this.switchNameHandler("French Fries")}
         >
           Switch Name
         </button> */}
-        <button style={style} onClick={this.togglePeople}>
-          Toggle People
-        </button>
-        {persons}
+          {/* <button style={style} onClick={this.togglePeople}>
+            Toggle People
+          </button> */}
+          {/* <StyledButton toggleColors={this.state.showPeople} onClick={this.togglePeople}>
+            Toggle People
+          </StyledButton> */}
+          <button className="btn" onClick={this.togglePeople}>
+            Toggle People
+          </button>
+          {persons}
 
-        <UserInput
-          userName={this.state.userName}
-          changed={this.userNameChangedHandler}
-        ></UserInput>
-        <UserOutput userName={this.state.userName}></UserOutput>
-        <div>
-          <h4>Lists And Conditionals Assignment</h4>
-          <input
-            type="text"
-            onChange={this.charChangeHandler}
-            value={this.state.chars}
-          />
-          <ValidationComponent
-            length={this.state.chars.length}
-          ></ValidationComponent>
-          {chars}
+          <UserInput
+            userName={this.state.userName}
+            changed={this.userNameChangedHandler}
+          ></UserInput>
+          <UserOutput userName={this.state.userName}></UserOutput>
+          <div>
+            <h4>Lists And Conditionals Assignment</h4>
+            <input
+              type="text"
+              onChange={this.charChangeHandler}
+              value={this.state.chars}
+            />
+            <ValidationComponent
+              length={this.state.chars.length}
+            ></ValidationComponent>
+            {chars}
+          </div>
         </div>
-      </div>
+      // </StyleRoot>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App 💞!!!'))
   }
 }
 
+// export default Radium(App);
 export default App;
