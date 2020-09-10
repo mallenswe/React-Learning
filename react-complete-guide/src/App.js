@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import Radium, { StyleRoot } from "radium";
-import styled from 'styled-components';
+// import styled from "styled-components";
 import "./App.css";
 
 import Person from "./Person/Person";
@@ -10,6 +10,7 @@ import UserOutput from "./BaseSyntaxAssignment/UserOutput/UserOutput";
 import ValidationComponent from "./ListConditionalAssignment/ValidationComponent/Validation";
 import CharComponent from "./ListConditionalAssignment/CharComponent/Char";
 
+// import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.toggleColors ? 'red' : '#26b38c'};
@@ -62,7 +63,7 @@ class App extends Component {
     // const person = Object.assign({}, this.state.people[personIndex]);
 
     const person = {
-      ...this.state.people[personIndex],
+      ...this.state.people[personIndex]
     };
 
     person.name = event.target.value;
@@ -133,14 +134,16 @@ class App extends Component {
         <div>
           {this.state.people.map((person, index) => {
             return (
-              <Person
-                name={person.name}
-                age={person.age}
-                click={() => this.deletePersonHandler(index)}
-                key={person.id}
-                // click={this.switchNameHandler.bind(this, "Chicken Nugget!")}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-              />
+              // <ErrorBoundary key={person.id}>
+                <Person
+                  name={person.name}
+                  age={person.age}
+                  click={() => this.deletePersonHandler(index)}
+                  key={person.id}
+                  // click={this.switchNameHandler.bind(this, "Chicken Nugget!")}
+                  changed={(event) => this.nameChangedHandler(event, person.id)}
+                />
+              // </ErrorBoundary>
             );
           })}
         </div>
@@ -183,56 +186,52 @@ class App extends Component {
 
     return (
       // <StyleRoot>
-        <div className="App">
-          <h1>
-            I'm a React App
-            <span
-              className="App-logo"
-              role="img"
-              aria-label="money tongue emoji"
-            >
-              🤑
-            </span>
-            <span className="App-logo" role="img" aria-label="swirling hearts">
-              💞
-            </span>
-          </h1>
-          <p className={classes.join(" ")}>This is really working!</p>
-          {/* <button
+      <div className="App">
+        <h1>
+          I'm a React App
+          <span className="App-logo" role="img" aria-label="money tongue emoji">
+            🤑
+          </span>
+          <span className="App-logo" role="img" aria-label="swirling hearts">
+            💞
+          </span>
+        </h1>
+        <p className={classes.join(" ")}>This is really working!</p>
+        {/* <button
           style={style}
           onClick={() => this.switchNameHandler("French Fries")}
         >
           Switch Name
         </button> */}
-          {/* <button style={style} onClick={this.togglePeople}>
+        {/* <button style={style} onClick={this.togglePeople}>
             Toggle People
           </button> */}
-          {/* <StyledButton toggleColors={this.state.showPeople} onClick={this.togglePeople}>
+        {/* <StyledButton toggleColors={this.state.showPeople} onClick={this.togglePeople}>
             Toggle People
           </StyledButton> */}
-          <button className="btn" onClick={this.togglePeople}>
-            Toggle People
-          </button>
-          {persons}
+        <button className="btn" onClick={this.togglePeople}>
+          Toggle People
+        </button>
+        {persons}
 
-          <UserInput
-            userName={this.state.userName}
-            changed={this.userNameChangedHandler}
-          ></UserInput>
-          <UserOutput userName={this.state.userName}></UserOutput>
-          <div>
-            <h4>Lists And Conditionals Assignment</h4>
-            <input
-              type="text"
-              onChange={this.charChangeHandler}
-              value={this.state.chars}
-            />
-            <ValidationComponent
-              length={this.state.chars.length}
-            ></ValidationComponent>
-            {chars}
-          </div>
+        <UserInput
+          userName={this.state.userName}
+          changed={this.userNameChangedHandler}
+        ></UserInput>
+        <UserOutput userName={this.state.userName}></UserOutput>
+        <div>
+          <h4>Lists And Conditionals Assignment</h4>
+          <input
+            type="text"
+            onChange={this.charChangeHandler}
+            value={this.state.chars}
+          />
+          <ValidationComponent
+            length={this.state.chars.length}
+          ></ValidationComponent>
+          {chars}
         </div>
+      </div>
       // </StyleRoot>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Hi, I\'m a React App 💞!!!'))
