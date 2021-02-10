@@ -5,8 +5,8 @@ import "./App.css";
 
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
-import Validation from "../components/Validation/Validation";
-import UserName from "../components/UserName/UserName";
+// import Validation from "../components/Validation/Validation";
+// import UserName from "../components/UserName/UserName";
 
 // import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
@@ -145,6 +145,7 @@ class App extends Component {
       // <StyleRoot>
       <div className="App">
         <Cockpit
+          title = {this.props.appTitle}
           showPersons={this.state.showpersons}
           persons={this.state.persons}
           clicked={this.togglepersons}

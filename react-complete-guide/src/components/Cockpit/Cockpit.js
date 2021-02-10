@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./Cockpit.css";
+import "./Cockpit.css";
 
 const cockpit = (props) => {
   const assignedClasses = [];
@@ -31,6 +31,7 @@ const cockpit = (props) => {
           💞
         </span>
       </h1>
+      <h2>{props.title}</h2>
       <p className={assignedClasses.join(" ")}>This is really working!</p>
       {/* <button
         style={style}
